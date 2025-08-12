@@ -4,68 +4,72 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import com.example.todolist.R
+import androidx.fragment.app.viewModels
+import com.example.todolist.base.BaseFragment
+import com.example.todolist.databinding.FragmentHomeBinding
 import com.example.todolist.repository.PreferenceRepository
-
-class HomeFragment : Fragment() {
-
-    private lateinit var prefRepo: PreferenceRepository
+class HomeFragment : BaseFragment() {
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+    private  val  prefRepo: PreferenceRepository by lazy {
+        PreferenceRepository(requireContext())
+    }
+    val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(layoutInflater)
+        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun bindEvent() {
+        binding.apply {
+            btnRegister.setOnClickListener {
+                val username = editUsername.text.toString().trim()
+                val password = editPassword.text.toString().trim()
 
-        // Khởi tạo PreferenceRepository
-        prefRepo = PreferenceRepository(requireContext())
+                if (username.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Vui lòng nhập đầy đủ thông tin",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    prefRepo.register(username, password)
+                    Toast.makeText(
+                        requireContext(),
+                        "Đăng ký thành công! Hãy đăng nhập tài khoản vừa đăng kí!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
 
-        val edtUsername = view.findViewById<EditText>(R.id.edit_username)
-        val edtPassword = view.findViewById<EditText>(R.id.edit_password)
-        val btnLogin = view.findViewById<Button>(R.id.btn_login)
-        val btnRegister = view.findViewById<Button>(R.id.btn_register)
+            // Xử lý nút Đăng nhập
+            btnLogin.setOnClickListener {
+                val username = editUsername.text.toString().trim()
+                val password = editPassword.text.toString().trim()
 
-        // Xử lý nút Đăng ký
-        btnRegister.setOnClickListener {
-            val username = edtUsername.text.toString().trim()
-            val password = edtPassword.text.toString().trim()
-
-            if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(requireContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show()
-            } else {
-                prefRepo.register(username, password)
-                Toast.makeText(requireContext(), "Đăng ký thành công! Hãy đăng nhập tài khoản vừa đăng kí!", Toast.LENGTH_SHORT).show()
+                if (prefRepo.login(username, password)) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Đăng nhập thành công! Xin chào $username",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    // TODO: Chuyển sang màn hình khác
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Sai tài khoản hoặc mật khẩu!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
-
-        // Xử lý nút Đăng nhập
-        btnLogin.setOnClickListener {
-            val username = edtUsername.text.toString().trim()
-            val password = edtPassword.text.toString().trim()
-
-            if (prefRepo.login(username, password)) {
-                Toast.makeText(
-                    requireContext(),
-                    "Đăng nhập thành công! Xin chào $username",
-                    Toast.LENGTH_SHORT
-                ).show()
-                // TODO: Chuyển sang màn hình khác
-
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    "Sai tài khoản hoặc mật khẩu!",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+        homeViewModel.text.observe(viewLifecycleOwner) {
 
         }
     }
