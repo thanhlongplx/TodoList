@@ -25,6 +25,7 @@
         android:id="@+id/edit_username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:hint="Tên đăng nhập"
         android:inputType="text"
         android:layout_marginStart="32dp"
@@ -34,11 +35,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+
     <!-- Trường nhập password -->
     <EditText
         android:id="@+id/edit_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:hint="Mật khẩu"
         android:inputType="textPassword"
         android:layout_marginStart="32dp"
