@@ -50,5 +50,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     // Thêm GSON để xử lý JSON (tùy chọn để lưu danh sách todo)
-    implementation("com.google.code.gson:gson:2.10.1")
+
+    implementation("com.google.code.gson:gson:2.11.0")
 }

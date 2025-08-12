@@ -52,12 +52,21 @@ class HomeFragment : Fragment() {
             val password = edtPassword.text.toString().trim()
 
             if (prefRepo.login(username, password)) {
-                Toast.makeText(requireContext(), "Đăng nhập thành công!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Đăng nhập thành công! Xin chào $username",
+                    Toast.LENGTH_SHORT
+                ).show()
                 // TODO: Chuyển sang màn hình khác
 
             } else {
-                Toast.makeText(requireContext(), "Sai tài khoản hoặc mật khẩu!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Sai tài khoản hoặc mật khẩu!",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+
         }
     }
 }
