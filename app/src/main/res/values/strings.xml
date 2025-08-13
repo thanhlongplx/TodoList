@@ -1,6 +1,23 @@
 <resources>
+
+<!-- Titles -->
     <string name="app_name">TodoList</string>
-    <string name="title_home">Home</string>
+
     <string name="title_dashboard">Task</string>
+
+
+<!-- Login/Register Notifications -->
+
+    <string name="title_home">Đăng Nhập/Đăng Ký</string>
+    <string name="hint_username">Tên đăng nhập</string>
+    <string name="hint_password">Mật khẩu</string>
+    <string name="button_login">Đăng Nhập</string>
+    <string name="button_register">Đăng Ký</string>
+
+    <string name="empty_field_error">Vui lòng nhập đầy đủ thông tin</string>
+    <string name="register_success">Đăng ký thành công! Hãy đăng nhập tài khoản vừa đăng kí!</string>
+    <string name="register_failure">Đăng ký thất bại: Tên người dùng đã tồn tại</string>
+    <string name="login_success">Đăng nhập thành công! Xin chào %s</string>
+    <string name="login_failure">Sai tài khoản hoặc mật khẩu!</string>
 
 </resources>

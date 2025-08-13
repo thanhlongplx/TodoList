@@ -11,7 +11,7 @@
         android:id="@+id/textHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Đăng Nhập/Đăng Ký"
+        android:text="@string/title_home"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +26,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
-        android:hint="Tên đăng nhập"
+        android:hint="@string/hint_username"
         android:inputType="text"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
@@ -35,14 +35,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
     <!-- Trường nhập password -->
     <EditText
         android:id="@+id/edit_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
-        android:hint="Mật khẩu"
+        android:hint="@string/hint_password"
         android:inputType="textPassword"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
@@ -56,7 +55,7 @@
         android:id="@+id/btn_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Đăng Nhập"
+        android:text="@string/button_login"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginTop="32dp"
@@ -69,7 +68,7 @@
         android:id="@+id/btn_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Đăng Ký"
+        android:text="@string/button_register"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginTop="16dp"

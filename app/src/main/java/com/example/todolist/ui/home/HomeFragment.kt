@@ -6,14 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.example.todolist.R
 import com.example.todolist.base.BaseFragment
+import com.example.todolist.data.database.DatabaseProvider
+import com.example.todolist.data.repository.UserRepository
 import com.example.todolist.databinding.FragmentHomeBinding
-import com.example.todolist.repository.PreferenceRepository
+import com.example.todolist.ui.home.HomeViewModel
+import kotlinx.coroutines.launch
+
 class HomeFragment : BaseFragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private  val  prefRepo: PreferenceRepository by lazy {
-        PreferenceRepository(requireContext())
+    private val userRepository: UserRepository by lazy {
+        UserRepository(DatabaseProvider.getDatabase(requireContext()).userDao())
     }
     val homeViewModel: HomeViewModel by viewModels()
 
@@ -35,42 +41,66 @@ class HomeFragment : BaseFragment() {
                 if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(
                         requireContext(),
-                        "Vui lòng nhập đầy đủ thông tin",
+                        getString(R.string.empty_field_error),
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
-                    prefRepo.register(username, password)
-                    Toast.makeText(
-                        requireContext(),
-                        "Đăng ký thành công! Hãy đăng nhập tài khoản vừa đăng kí!",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        // check username
+                        if (userRepository.isUsernameExists(username)) {
+                            Toast.makeText(
+                                requireContext(),
+                                getString(R.string.register_failure),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            try {
+                                userRepository.register(username, password)
+                                Toast.makeText(
+                                    requireContext(),
+                                    getString(R.string.register_success),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } catch (e: Exception) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    getString(R.string.register_failure),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    }
                 }
             }
 
-            // Xử lý nút Đăng nhập
             btnLogin.setOnClickListener {
                 val username = editUsername.text.toString().trim()
                 val password = editPassword.text.toString().trim()
 
-                if (prefRepo.login(username, password)) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Đăng nhập thành công! Xin chào $username",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    // TODO: Chuyển sang màn hình khác
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Sai tài khoản hoặc mật khẩu!",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                viewLifecycleOwner.lifecycleScope.launch {
+                    if (userRepository.login(username, password)) {
+                        Toast.makeText(
+                            requireContext(),
+                            String.format(getString(R.string.login_success), username),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.login_failure),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
         }
         homeViewModel.text.observe(viewLifecycleOwner) {
-
+            // Không cần xử lý text ở đây nếu không sử dụng
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
