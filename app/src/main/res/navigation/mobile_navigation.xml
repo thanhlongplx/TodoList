@@ -17,5 +17,11 @@
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
+    <fragment
+        android:id="@+id/navigation_create_task"
+        android:name="com.example.todolist.ui.dashboard.CreateTaskFragment"
+        android:label="@string/title_create_task"
+        tools:layout="@layout/fragment_create_task" />
+
 
 </navigation>

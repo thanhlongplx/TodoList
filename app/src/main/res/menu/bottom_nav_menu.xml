@@ -11,6 +11,8 @@
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_dashboard" />
 
-
-
+    <item
+        android:id="@+id/navigation_create_task"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_create_task" />
 </menu>

@@ -4,10 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "Tai"
-    }
+class DashboardViewModel() : ViewModel() {
+
+    private val _text = MutableLiveData<String>()
     val text: LiveData<String> = _text
+
+
+
+    fun setUsername(username: String?) {
+        _text.value = username ?: "Guest"
+    }
 }

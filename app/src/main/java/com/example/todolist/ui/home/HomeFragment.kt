@@ -1,5 +1,6 @@
 package com.example.todolist.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -79,6 +80,9 @@ class HomeFragment : BaseFragment() {
 
                 viewLifecycleOwner.lifecycleScope.launch {
                     if (userRepository.login(username, password)) {
+                        // Lưu username vào SharedPreferences khi đăng nhập thành công
+                        val sharedPreferences = requireContext().getSharedPreferences("TodoListPrefs", Context.MODE_PRIVATE)
+                        sharedPreferences.edit().putString("current_username", username).apply()
                         Toast.makeText(
                             requireContext(),
                             String.format(getString(R.string.login_success), username),
