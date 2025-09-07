@@ -8,10 +8,10 @@ class TodoRepository(private val todoDao: TodoDao) {
 
     val allTodos: LiveData<List<Todo>> = todoDao.getAllTodos()
 
-    suspend fun insert(todo: Todo) {
+    suspend fun insert(title: String, description: String) {
+        val todo = Todo(title = title, description = description)
         todoDao.insert(todo)
     }
-
     suspend fun update(todo: Todo) {
         todoDao.update(todo)
     }

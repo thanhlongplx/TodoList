@@ -2,12 +2,13 @@
 
 <!-- Titles -->
     <string name="app_name">TodoList</string>
-
-    <string name="title_dashboard">Task</string>
-
-
+    <string name="app_logo">App Logo</string>
+    <string name="app_display_name">TodoList</string>
+    <string name="app_tagline">Quản Lý Công Việc Thông Minh</string>
+    <string name="title_dashboard">Danh sách công việc</string>
+    <string name="title_create_task">Thêm công việc</string>
+    <string name="guest_greeting">Xin chào, hãy đăng nhập để xem việc của bạn!</string>
 <!-- Login/Register Notifications -->
-
     <string name="title_home">Đăng Nhập/Đăng Ký</string>
     <string name="hint_username">Tên đăng nhập</string>
     <string name="hint_password">Mật khẩu</string>
@@ -19,5 +20,14 @@
     <string name="register_failure">Đăng ký thất bại: Tên người dùng đã tồn tại</string>
     <string name="login_success">Đăng nhập thành công! Xin chào %s</string>
     <string name="login_failure">Sai tài khoản hoặc mật khẩu!</string>
-
+    <string name="password_not_match">Mật khẩu nhập lại không khớp</string>
+    <string name="title_login">Đăng Nhập</string>
+    <string name="title_register">Đăng Ký</string>
+    <string name="button_goto_register">Chưa có tài khoản? Đăng ký</string>
+    <string name="hint_confirm_password">Nhập lại mật khẩu</string>
+    <!--  Task Notifications  -->
+    <string name="add_task_success"> Thêm công việc mới thành công</string>>
+    <string name="hint_task_title">Nhập tiêu đề công việc</string>
+    <string name="hint_task_description">Nhập mô tả công việc</string>
+    <string name="button_add_task">Thêm công việc</string>
 </resources>

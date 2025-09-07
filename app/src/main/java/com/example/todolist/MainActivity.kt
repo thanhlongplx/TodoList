@@ -14,8 +14,8 @@ import com.example.todolist.base.BaseActivity
 import com.example.todolist.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity(R.layout.activity_main) {
-  override  val navHostFragment by lazy { this.findViewById<FragmentContainerView>(R.id.nav_host_fragment_activity_main).getFragment() as? NavHostFragment }
-  private  val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    override  val navHostFragment by lazy { this.findViewById<FragmentContainerView>(R.id.nav_host_fragment_activity_main).getFragment() as? NavHostFragment }
+    private  val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     override fun initData() {
 
     }
@@ -23,16 +23,14 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     override fun bindData() {
 
     }
-
     override fun bindEvent() {
 
     }
-
     override fun bindComponent() {
         val navController = navHostFragment?.findNavController()
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard,
+                R.id.navigation_dashboard,R.id.navigation_create_task
             )
         )
         if (navController != null) {

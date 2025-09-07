@@ -10,4 +10,7 @@ class DashboardViewModel : ViewModel() {
         value = "Tai"
     }
     val text: LiveData<String> = _text
+    fun setUsername(username: String?) {
+        _text.value = username ?: "Guest"
+    }
 }
